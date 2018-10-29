@@ -1,5 +1,5 @@
 const ObjectId = require('mongodb').ObjectId;
-const MongoService = require('./mongoService');
+const MongoService = require('./MongoService');
 
 function query() {
     return MongoService.connect()
