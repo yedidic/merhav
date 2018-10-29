@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    color: $clr4;
+}
+
+body {
+  margin: 0;
+  background: $clr5;
+  font-family: 'Rubik';
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 99999999px;
+    border: $clr1 1px solid;
+    color: $clr1;
+    background: $clr2;
+    width: fit-content;
+    padding: 5px 20px;
+    transition: all .5s;
+}
+
+button:hover {
+    border: $clr2 1px solid;
+    color: $clr2;
+    background: $clr1;
+}
+
+a {
+text-decoration: none;
+    &:active, &:visited {
+        color: inherit;
+    }
+}

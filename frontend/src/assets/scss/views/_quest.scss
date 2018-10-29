@@ -1,0 +1,45 @@
+.quest {
+}
+
+.countdown {
+    // position: fixed;
+    // right: 50%;
+    // left: 50%;
+    border-radius: 87800px;
+    border: 3px solid black;
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem auto;
+    .countdown-txt {
+      margin-bottom: 1rem;
+    }
+    .countdown-clock {
+      font-size: 2rem;
+    }
+}
+.quest-txt {
+color: black;
+text-align: center;
+flex-grow: 1;
+margin: 0;
+margin-top: 0.5rem;
+}
+
+.browse-btn {
+width: 6rem;
+border-radius: 8px;
+border: 1.5px black solid;
+background: rgb(255, 227, 176);
+font-weight: bold;
+margin-bottom: 2rem;
+transition: all 1s;
+&:hover {
+    background: rgb(31, 185, 231);
+    // color:  rgb(255, 227, 176);
+    // border: 1.5px  rgb(255, 227, 176) solid;
+}
+}

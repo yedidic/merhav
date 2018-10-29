@@ -1,0 +1,25 @@
+/*  scss    */
+@import './vars.scss';
+@import './fonts.scss';
+@import './layout.scss';
+@import './helper.scss';
+
+/* Views */
+@import './views/quest.scss';
+
+/*  Components  */
+@import './components/studentStats.scss';
+@import './components/navBar.scss';
+@import './components/greetingUser.scss';
+
+
+
+// import the built-in vue-range-slider style
+@import '~vue-range-slider/dist/vue-range-slider.scss';
+
+
+// <helper> 
+
+
+
+// </helper> 

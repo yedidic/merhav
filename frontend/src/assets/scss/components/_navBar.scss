@@ -1,0 +1,37 @@
+
+.nav-bar {
+    width: 100%;
+    background: $clr4;
+    height: 4rem;
+    color: $clr2;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top:0;
+    right:0;
+}
+
+.nav-bar ul{
+
+
+
+    li{
+        margin-left: 2rem;
+    }
+    li:last-child {
+        margin: 0;
+    }
+}
+
+.nav-bar select{
+    margin-left: 20px;
+}
+
+.nav-bar .logo {
+
+}
+
+@media (max-width: 630px){
+    
+}
