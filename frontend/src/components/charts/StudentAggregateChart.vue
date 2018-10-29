@@ -68,17 +68,17 @@ export default {
     this.renderCanvas();
   },
   computed: {
-    exams() {
-      return this.$store.getters.loggedinUser.exams
+    submissions() {
+      return this.$store.getters.loggedinUser.submissions
         .slice()
         .sort((a, b) => a.at - b.at);
     },
     months() {
       this.$i18n.locale; // To update the months on locale change
-      return this.exams.map(({ at }) => this.moment(at).format('MMMM'));
+      return this.submissions.map(({ at }) => this.moment(at).format('MMMM'));
     },
     avgs() {
-      return this.exams.map(exam => sum(exam.answers) / exam.answers.length);
+      return this.submissions.map(({answers}) => sum(answers) / answers.length);
     }
   }
 };

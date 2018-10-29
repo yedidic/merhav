@@ -37,6 +37,7 @@ button:hover {
 
 a {
 text-decoration: none;
+color: inherit;
     &:active, &:visited {
         color: inherit;
     }
