@@ -18,12 +18,15 @@
 </i18n>
 
 <template>
-  <nav class="nav-bar">
-    <label for="locale">שפה</label>
-    <select v-model="locale">
-      <option>he</option>
-      <option>en</option>
-    </select>
+  <nav class="nav-bar flex space-between">
+    <div class="locale-menu" hidden>
+      <label for="locale">שפה</label>
+      <select v-model="locale">
+        <option>he</option>
+        <option>en</option>
+      </select>
+    </div>
+    <logo-container/>
     <ul class="clean-list flex">
       <li>
         <router-link to="/">{{$t('home')}}</router-link>
@@ -46,6 +49,8 @@
 </template>
 
 <script>
+import LogoContainer from '@/components/LogoContainer.vue';
+
 export default {
   name: 'NavBar',
   props: {
@@ -60,12 +65,14 @@ export default {
   },
   watch: {
     locale(val) {
-      this.$parent.locale = val
+      this.$parent.locale = val;
     }
   },
   methods: {},
   computed: {},
-  components: {}
+  components: {
+    LogoContainer
+  }
 };
 </script>
 
