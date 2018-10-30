@@ -1,17 +1,52 @@
 <i18n>
-{}
+{
+  "en":{
+    "enterSchoolCode": "School code:",
+    "exampleSchoolCode": "For Example: 269",
+    "enterTz": "ID:",
+    "exampleTz": "For Example: 214456934",
+    "enterPassword": "Password:",
+    "examplePassword": "For Example: a45B6",
+    "heading": "Login to MERHAV",
+    "login" : "Log In"
+  },
+  "he":{
+    "enterSchoolCode": "קוד בית הספר:",
+    "exampleSchoolCode": "לדוגמא: 269",
+    "enterTz": "מספר ת.ז.:",
+    "exampleTz": "לדוגמא : 214456934",
+    "enterPassword": "סיסמא:",
+    "examplePassword": "לדוגמא a45B6",
+    "heading": "כניסה למרח\"ב",
+    "login": "היכנס"
+  }
+}
 </i18n>
 
 <template>
 <section class="login">
-    <h1>Login Page</h1>
+    <h1>{{$t('heading')}}</h1>
     <form class="flex-col justify-center align-center" @submit.prevent="loginUser">
-
-    <input type="text" placeholder="Enter your school code" v-model.number="userDetails.schoolCode">
-    <input type="text" placeholder="Enter your ID" v-model.number="userDetails.userTz">
-    <input type="password" placeholder="Enter Password" v-model="userDetails.psw">
+    <label class="flex align-center">
+      <span>
+         {{$t('enterSchoolCode')}}  
+      </span>
+      <input type="number" :placeholder="$t('exampleSchoolCode')" v-model.number="userDetails.schoolCode">
+    </label>
+    <label class="flex align-center">
+      <span>
+        {{$t('enterTz')}}  
+      </span>
+      <input type="number" :placeholder="$t('exampleTz')" v-model.number="userDetails.userTz">
+    </label>
+    <label class="flex align-center">
+      <span>
+       {{$t('enterPassword')}}  
+      </span>
+      <input type="password" :placeholder="$t('examplePassword')" v-model="userDetails.psw">
+    </label>
     
-    <button>Log In</button>
+    <button>{{$t('login')}}</button>
     </form>
 
 </section>    
@@ -46,11 +81,7 @@ export default {
         .dispatch(LOGIN_USER, { userDetails: this.userDetails })
         .then(user => {
           if (user && user.type === 's') this.$router.push('/student');
-          else if (user && user.type === 't') {
-            this.$router.push('/teacher');
-          } else if (user && user.type === 'h') {
-            this.$router.push('/teacher/headmaster');
-          }
+          else if (user) this.$router.push('/teacher');
         });
     }
   }

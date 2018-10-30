@@ -8,16 +8,20 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.409df069.js"
   },
   {
-    "revision": "d58e47b5aae45915dde2",
-    "url": "/js/app.a0f818ec.js"
+    "revision": "108599442a18c13892de",
+    "url": "/js/app.f227edb3.js"
   },
   {
-    "revision": "bdcb05c9644be3ea524a",
-    "url": "/js/about.16f12a91.js"
+    "revision": "03f9f3254f625f3e3471",
+    "url": "/js/about.d0bce8bc.js"
   },
   {
-    "revision": "3ac637f892c7d5d7c0004293a2a0bd34",
+    "revision": "e924c57eae4285503ac419f3dcdff94b",
     "url": "/index.html"
+  },
+  {
+    "revision": "0b61497294ada336d0822881d7c9e51f",
+    "url": "/img/merhav.0b614972.svg"
   },
   {
     "revision": "6c980940392587c8d7d325c07965ebda",
@@ -28,7 +32,7 @@ self.__precacheManifest = [
     "url": "/fonts/Rubik-Bold.87b4e0d5.ttf"
   },
   {
-    "revision": "d58e47b5aae45915dde2",
-    "url": "/css/app.4b6e0ca5.css"
+    "revision": "108599442a18c13892de",
+    "url": "/css/app.685074bb.css"
   }
 ];

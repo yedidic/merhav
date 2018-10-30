@@ -18,32 +18,34 @@
     :lastVisit="user.lastVisit"
     ></greeting-user>
     
-    <div class="actions-container">
-    <!-- <pre>
-      {{students}}
-    </pre> -->
-    <section class="students-table">
-      <header class="table-header flex">
-        <p class="expand-btn"></p>
-        <p>שם</p>
-        <p>חודש</p>
-        <p>ציון מצרפי אחרון</p>
-        <p>שינוי חודשי</p>
-      </header>
-        <student-basic-info
-          v-for="student in students"
-          :hebName="student.hebName"
-          :submissions="student.submissions"
-          :studentId="student._id"
-          :key="student._id"
-        >
-        </student-basic-info>
-    </section>
-      <!-- TODO: maybe emulate few secs to wait here -->
-      <router-link to="/student/stats">
-        <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
-      </router-link>
+    <headmaster-section 
+    v-if="isHeadmaster"
+    @chooseClass="chooseClass"/>
+
+    <div class="actions-container flex-col align-center">
+      <section class="students-table" v-if="students.length > 0">
+        <header class="table-header flex">
+          <p class="expand-btn"></p>
+          <p>שם</p>
+          <p>חודש</p>
+          <p>תאריך</p>
+          <p>תוצאה</p>
+          <p>שינוי חודשי</p>
+        </header>
+          <student-basic-info
+            v-for="student in students"
+            :hebName="student.hebName"
+            :submissions="student.submissions"
+            :studentId="student._id"
+            :key="student._id"
+          >
+          </student-basic-info>
+      </section>
     </div>
+      <!-- TODO: maybe emulate few secs to wait here -->
+    <!-- <router-link to="/student/stats">
+      <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
+    </router-link> -->
   </section>
 </template>
 
@@ -51,14 +53,15 @@
 import UserService from '../services/UserService.js';
 
 import GreetingUser from '@/components/GreetingUser.vue';
+import HeadmasterSection from '@/components/Teacher/HeadmasterSection.vue';
 import StudentBasicInfo from '@/components/Teacher/StudentBasicInfo.vue';
-import StudentExpandInfo from '@/components/Teacher/StudentExpandInfo.vue';
+
 export default {
   data() {
     return {
       students: [],
-      expands: {},
-      openeds: []
+      openeds: [],
+      classCode: null
     };
   },
   computed: {
@@ -68,17 +71,25 @@ export default {
     },
     user() {
       return this.$store.getters.loggedinUser;
+    },
+    isHeadmaster() {
+      return this.user.type === 'h';
     }
   },
   created() {
-    this.loadStudents();
+    if (!this.isHeadmaster) {
+      this.loadStudents(this.user.classCode);
+    }
   },
   methods: {
-    loadStudents() {
-      UserService.getByClassCode(
-        this.user.classCode,
-        this.user.schoolCode
-      ).then(students => (this.students = students));
+    chooseClass(classCode) {
+      if (!this.isHeadmaster) return;
+      this.loadStudents(classCode);
+    },
+    loadStudents(classCode) {
+      UserService.getByClassCode(classCode, this.user.schoolCode).then(
+        students => (this.students = students)
+      );
     },
     getAvgForCurrMonth(exams) {
       exams = this.sortByAt(exams);
@@ -99,18 +110,13 @@ export default {
   },
   components: {
     StudentBasicInfo,
-    StudentExpandInfo,
-    GreetingUser
+    GreetingUser,
+    HeadmasterSection
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.actions-container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
 
 .actions-container button {
   width: 300px;

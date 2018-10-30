@@ -1,21 +1,22 @@
 <template>
-<div>
+<section>
   <div
     v-for="(submission, idx) in submissions"
     @click="expand(idx)"  
     :key="submission.at"
     :class="['flex' , idx > 0 ? 'student-expand-info': 'student-basic-info', isIncrease(idx)]"
     v-if="idx === 0 || isExpanded">
-      <p class="expand-btn" v-if="idx===0"><i class="fas fa-plus-circle"></i></p>
+      <p class="expand-btn"><i class="fas fa-plus-circle" v-if="idx===0"></i></p>
       <p class="heb-name">{{idx === 0 ? hebName: ''}}</p>
       <p>{{getMonth(submission.at)}}</p>
+      <p>{{getDate(submission.at)}}</p>
       <!-- How to watch the i18n here? -->
       <p>{{submissionAvg(submission)}}</p>
       <p class="change-precent flex"
          v-html="precentageForDisplay(submission, submissions[idx+1])">
       </p>
   </div>
-</div>
+</section>
 </template>
 
 <script>
@@ -54,6 +55,9 @@ export default {
     getMonth(at) {
       // this.$watch
       return this.moment(at).format('MMMM');
+    },
+    getDate(at){
+      return this.moment(at).format('DD/MM/YYYY')
     },
     getChangePrecents(sub1, sub2) {
       if (!sub2) return;

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.1f5deb6b4238a34f2c754e96fb029161.js"
+  "/precache-manifest.a15ae545c3fe8377f794da4675cc99e1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "merhav"});

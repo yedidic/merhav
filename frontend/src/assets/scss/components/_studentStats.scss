@@ -17,6 +17,12 @@
     header p{
         background: $clr6;
         color: $clr2;
+        font-family: 'Rubik-bold';
+        font-weight: 700;
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .expand-btn {
         flex: .2;
@@ -30,6 +36,15 @@
 .student-basic-info {
     background: $clr5;
     cursor: pointer;
+    p {
+        height: 2.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // font-family: 'Rubik-bold';
+        // font-weight: 700;
+    }
+    
 }
 .student-expand-info {
     background: $clr6;
@@ -39,7 +54,7 @@
         color:  $clr2;
     }
     .heb-name {
-        flex: 2.2rem;
+        flex: 1;
     }
 }
 

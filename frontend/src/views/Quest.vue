@@ -2,11 +2,13 @@
 {
   "en":{
     "questTxt":"Question {questIdx} from {length}",
-    "finish": "Finish!"
+    "finish": "Finish!",
+    "timeLeftLabel": "Time Left"
   },
   "he":{
     "questTxt":"שאלה {questIdx} מתוך {length}",
-    "finish": "סיימתי!"
+    "finish": "סיימתי!",
+    "timeLeftLabel": "הזמן שנותר"
   }
 }
 </i18n>
@@ -15,7 +17,7 @@
   <section class="quest" v-if="exam">
     <p class="countdown">
       <span class="countdown-label">
-        Time Left
+        {{$t('timeLeftLabel')}}
       </span>
       <span class="countdown-clock">
         {{timeLeft}}

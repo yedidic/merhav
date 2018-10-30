@@ -12,7 +12,7 @@ html {
 
 body {
   margin: 0;
-  background: $clr5;
+  background: $clr1;
   font-family: 'Rubik';
 }
 
@@ -23,7 +23,7 @@ button {
     border-radius: 99999999px;
     border: $clr1 1px solid;
     color: $clr1;
-    background: $clr2;
+    background: $clr4;
     width: fit-content;
     padding: 5px 20px;
     transition: all .5s;
@@ -31,8 +31,8 @@ button {
 
 button:hover {
     border: $clr2 1px solid;
-    color: $clr2;
-    background: $clr1;
+    color: $clr1;
+    background: $clr4;
 }
 
 a {
@@ -44,5 +44,12 @@ color: inherit;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
+}
+
+input {
+    border-radius: 89988px;
+    border: none;
+    font-family: inherit;
+    padding: .5rem 1rem;
 }

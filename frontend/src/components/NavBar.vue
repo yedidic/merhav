@@ -19,14 +19,16 @@
 
 <template>
   <nav class="nav-bar flex space-between">
-    <div class="locale-menu" hidden>
+    <div class="locale-menu" >
       <label for="locale">שפה</label>
       <select v-model="locale">
         <option>he</option>
         <option>en</option>
       </select>
     </div>
-    <logo-container/>
+    <router-link :to="user? myPage: '/'" >
+       <logo-container/>
+    </router-link>
     <ul class="clean-list flex">
       <li>
         <router-link to="/">{{$t('home')}}</router-link>

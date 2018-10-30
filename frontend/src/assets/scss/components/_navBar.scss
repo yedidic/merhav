@@ -1,15 +1,16 @@
 
 .nav-bar {
     width: 100%;
-    background: $clr4;
+    background: $clr2;
     height: 4rem;
-    color: $clr2;
+    color: $clr4;
     padding: 0 20px;
     display: flex;
     align-items: center;
     position: fixed;
     top:0;
     right:0;
+    z-index: 400;
 }
 
 .nav-bar ul{
