@@ -90,6 +90,7 @@ label {
   span {
     margin-left: 1rem;
     font-size: 1.2rem;
+    font-weight: 700;
   }
 }
 

@@ -73,12 +73,14 @@ export default {
     },
     months() {
       this.$i18n.locale; // To update the months on locale change
-      return this.submissions.map(({ at }) => this.moment(at).format('MMMM'));
+      return this.submissions.map(({ at }) => this.moment(at).format('DD/MM'));
     },
     avgs() {
       return this.submissions.map(({answers}) => sum(answers) / answers.length);
     }
-  }
+  },
+  created() {    
+  },
 };
 </script>
 
