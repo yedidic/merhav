@@ -37,10 +37,11 @@
 
 <template>
 <section class="headmaster-section">
-  headmaster-section
   <form class="flex-col justify-center align-center" @submit.prevent="classChosen">
     <label>
-      {{$t('chooseClass')}}
+      <span>
+        {{$t('chooseClass')}}
+      </span>  
       <!-- <input 
       type="text" 
       :placeholder="$t('chooseClass')" 
@@ -85,4 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+label {
+  span {
+    margin-left: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
 </style>

@@ -15,7 +15,7 @@
         color: $clr6
     }
     header p{
-        background: $clr6;
+        background: $clr1;
         color: $clr2;
         font-family: 'Rubik-bold';
         font-weight: 700;
@@ -36,7 +36,6 @@
     }
     .expand-btn {
         flex: .2;
-        color: green;
     }
     
     font-size: 17px;
@@ -92,6 +91,10 @@
     }
     .heb-name {
         flex: 1;
+        // border-right-color: transparent;
+    }
+    .expand-btn {
+        // border-left-color: transparent;
     }
 }
 
@@ -105,10 +108,10 @@ p.change-precent {
 }
 
 .increase p {
-    background: greenyellow;
-    color: black;
+    background: darkgreen;
+    color: white;
   }
   .decrease p {
-    background: rgb(255, 152, 152);
-    color: black;
+    background: darkred;
+    color: white;
   }

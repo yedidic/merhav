@@ -71,7 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 .actions-container button {
-  width: 15rem;
+  width: 20rem;
   padding: 0.7rem 1rem;
   margin-bottom: 25px;
 }
