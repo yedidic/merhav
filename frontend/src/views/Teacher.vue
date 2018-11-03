@@ -24,22 +24,22 @@
 
     <div class="actions-container flex-col align-center">
       <section class="students-table" v-if="students.length > 0">
-        <header class="table-header flex">
+        <header class="table-header submission-row flex">
           <p class="expand-btn"></p>
-          <p>שם</p>
-          <p>חודש</p>
-          <p>תאריך</p>
-          <p>תוצאה</p>
-          <p>שינוי חודשי</p>
+          <p class="t-name">שם</p>
+          <p class="pc-only t-month">חודש</p>
+          <p class="t-date">תאריך</p>
+          <p class="t-res">תוצאה</p>
+          <p class="t-change">שינוי</p>
         </header>
-          <student-basic-info
+          <submissions-content
             v-for="student in students"
             :hebName="student.hebName"
             :submissions="student.submissions"
             :studentId="student._id"
             :key="student._id"
           >
-          </student-basic-info>
+          </submissions-content>
       </section>
     </div>
       <!-- TODO: maybe emulate few secs to wait here -->
@@ -54,7 +54,7 @@ import UserService from '../services/UserService.js';
 
 import GreetingUser from '@/components/GreetingUser.vue';
 import HeadmasterSection from '@/components/Teacher/HeadmasterSection.vue';
-import StudentBasicInfo from '@/components/Teacher/StudentBasicInfo.vue';
+import SubmissionsContent from '@/components/Teacher/SubmissionsContent.vue';
 
 export default {
   data() {
@@ -109,7 +109,7 @@ export default {
     }
   },
   components: {
-    StudentBasicInfo,
+    SubmissionsContent,
     GreetingUser,
     HeadmasterSection
   }

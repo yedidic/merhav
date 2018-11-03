@@ -72,11 +72,12 @@ export default {
       this.submission.examId = this.exam._id;
       this.submission.uniqQuest = this.loggedinUser.uniqQuest;
       this.submission.at = new Date();
-      this.$store.dispatch({
-        type: UNSHIFT_SUBMISSION,
-        submission: this.submission
-      });
-      this.$router.push('/student/quest/success');
+      this.$store
+        .dispatch({
+          type: UNSHIFT_SUBMISSION,
+          submission: this.submission
+        })
+        .then(() => this.$router.push('/student/quest/success'));
     },
     getQuest(idx) {
       if (idx < this.exam.quests.length) {
@@ -85,13 +86,13 @@ export default {
       return this.loggedinUser.uniqQuest;
     },
     decreaseTimeLeft() {
-      // this.timeLeftInterval = setInterval(() => {
-      //   --this.timeLeft;
-      //   if (this.timeLeft <= 0) {
-      //     clearInterval(this.timeLeftInterval);
-      //     this.submitQuest();
-      //   }
-      // }, 1000);
+      this.timeLeftInterval = setInterval(() => {
+        --this.timeLeft;
+        if (this.timeLeft <= 0) {
+          clearInterval(this.timeLeftInterval);
+          this.submitQuest();
+        }
+      }, 1000);
     }
   },
   computed: {
@@ -106,6 +107,9 @@ export default {
     }
   },
   destroyed() {
+    console.log('Quest has been destroyed');
+    
+    this.isSubmitted = true;
     clearInterval(this.timeLeftInterval);
   },
   components: {
@@ -115,7 +119,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
 
 

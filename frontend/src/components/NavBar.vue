@@ -18,40 +18,29 @@
 </i18n>
 
 <template>
-  <nav class="nav-bar flex space-between">
-    <div class="locale-menu" >
-      <label for="locale">שפה</label>
-      <select v-model="locale">
-        <option>he</option>
-        <option>en</option>
-      </select>
+  <nav class="nav-bar">
+    <div class="container flex space-between">
+      <div class="locale-menu" hidden>
+        <label for="locale">שפה</label>
+        <select v-model="locale">
+          <option>he</option>
+          <option>en</option>
+        </select>
+      </div>
+      <router-link :to="user? myPage: '/'" >
+        <logo-container/>
+      </router-link>
+        <views-menu
+          :user="user"
+          :myPage="myPage"
+          :loginMode="loginMode"/>
     </div>
-    <router-link :to="user? myPage: '/'" >
-       <logo-container/>
-    </router-link>
-    <ul class="clean-list flex">
-      <li>
-        <router-link to="/">{{$t('home')}}</router-link>
-      </li>
-      <li>
-        <router-link to="/about">{{$t('about')}}</router-link>
-      </li>
-      <li>
-        <router-link to="/login">
-          <span>
-            {{$t(loginMode)}}
-          </span>
-        </router-link>
-      </li>
-      <li>
-        <router-link :to="myPage" v-if="user">{{$t('myPage')}}</router-link>
-      </li>
-    </ul>
   </nav>
 </template>
 
 <script>
 import LogoContainer from '@/components/LogoContainer.vue';
+import ViewsMenu from '@/components/ViewsMenu.vue';
 
 export default {
   name: 'NavBar',
@@ -73,7 +62,8 @@ export default {
   methods: {},
   computed: {},
   components: {
-    LogoContainer
+    LogoContainer,
+    ViewsMenu
   }
 };
 </script>

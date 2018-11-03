@@ -1,8 +1,6 @@
 <template>
 <section class="student-aggregate-chart">
   <canvas id="myChart" width="400" height="400" ref="chart"></canvas>
-      
-  <!-- {{moment().set('month', Date.now())}} -->
 </section>
 </template>
 
@@ -85,4 +83,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

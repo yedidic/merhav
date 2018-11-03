@@ -1,18 +1,18 @@
 <template>
-<section>
+<section class="submissions-content">
   <div
     v-for="(submission, idx) in submissions"
     @click="expand(idx)"  
     :key="submission.at"
-    :class="['flex' , idx > 0 ? 'student-expand-info': 'student-basic-info', isIncrease(idx)]"
+    :class="['submission-row', 'flex' , idx > 0 ? 'student-expand-info': 'student-basic-info', isIncrease(idx)]"
     v-if="idx === 0 || isExpanded">
-      <p class="expand-btn"><i class="fas fa-plus-circle" v-if="idx===0"></i></p>
-      <p class="heb-name">{{idx === 0 ? hebName: ''}}</p>
-      <p>{{getMonth(submission.at)}}</p>
-      <p>{{getDate(submission.at)}}</p>
+      <p class="expand-btn"><i class="fas fa-plus-circle" v-if="idx === 0"></i></p>
+      <p class="t-name heb-name">{{idx === 0 ? hebName: ''}}</p>
+      <p class="t-month pc-only">{{getMonth(submission.at)}}</p>
+      <p class="t-date">{{getDate(submission.at)}}</p>
       <!-- How to watch the i18n here? -->
-      <p>{{submissionAvg(submission)}}</p>
-      <p class="change-precent flex"
+      <p class="t-res">{{submissionAvg(submission)}}</p>
+      <p class="t-change change-precent flex"
          v-html="precentageForDisplay(submission, submissions[idx+1])">
       </p>
   </div>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'student-basic-info',
+  name: 'submissions-content',
   props: {
     studentId: String,
     hebName: String,
@@ -54,10 +54,11 @@ export default {
     },
     getMonth(at) {
       // this.$watch
-      return this.moment(at).format('MMMM');
+      const month = this.moment(at).format('MMMM');
+      return month.length > 4 ? month.substr(0, 3)+'\'' : month;
     },
-    getDate(at){
-      return this.moment(at).format('DD/MM/YYYY')
+    getDate(at) {
+      return this.moment(at).format('DD.MM.YY');
     },
     getChangePrecents(sub1, sub2) {
       if (!sub2) return;

@@ -89,10 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-form * {
-  width: 300px;
-  margin-bottom: 1rem;
-}
+
 </style>
 
 

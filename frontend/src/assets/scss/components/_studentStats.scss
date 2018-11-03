@@ -24,11 +24,26 @@
         align-items: center;
         justify-content: center;
     }
+
+    header p.pc-only {
+        display: none;
+    }
+
+    @media (min-width: 420px){
+        header p.pc-only {
+            display: flex;
+        }
+    }
     .expand-btn {
         flex: .2;
         color: green;
     }
     
+    font-size: 17px;
+    @media (min-width: 420px){
+        font-size: inherit;
+    }
+
 }
 
 
@@ -37,14 +52,24 @@
     background: $clr5;
     cursor: pointer;
     p {
-        height: 2.1rem;
+        height: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;
         // font-family: 'Rubik-bold';
         // font-weight: 700;
     }
-    
+    p.pc-only {
+        display: none;
+    }
+    @media (min-width: 420px){
+       p.pc-only {
+            display: flex;
+        }
+        p {
+            height: 2.1rem;
+        }
+    }
 }
 .student-expand-info {
     background: $clr6;
@@ -52,6 +77,18 @@
     p{
         background: $clr1;
         color:  $clr2;
+        height: 1.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    p.pc-only {
+        display: none;
+    }
+    @media (min-width: 420px){
+       p.pc-only {
+            display: flex;
+        }
     }
     .heb-name {
         flex: 1;
@@ -61,8 +98,6 @@
 p.change-precent {
     text-align: left;
     direction: ltr;
-    // .change-precent-display{
-    // }
     .sign {
         padding: 0 .7rem;
         width: 1.5rem;

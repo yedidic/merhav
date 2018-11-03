@@ -7,12 +7,12 @@ html, body {
 }
 
 html {
-    color: $clr4;
+    color: $clr1;
 }
 
 body {
   margin: 0;
-  background: $clr1;
+  background: $clr2;
   font-family: 'Rubik';
 }
 
@@ -23,16 +23,16 @@ button {
     border-radius: 99999999px;
     border: $clr1 1px solid;
     color: $clr1;
-    background: $clr4;
+    background: $clr5;
     width: fit-content;
     padding: 5px 20px;
-    transition: all .5s;
+    transition: all .7s;
 }
 
 button:hover {
-    border: $clr2 1px solid;
-    color: $clr1;
-    background: $clr4;
+    border: $clr5 1px solid;
+    color: $clr5;
+    background: $clr1;
 }
 
 a {
@@ -48,8 +48,36 @@ h1 {
 }
 
 input {
+    border: $clr1 solid .1rem;
+    width: 150px;
     border-radius: 89988px;
-    border: none;
     font-family: inherit;
     padding: .5rem 1rem;
+    &:focus {
+        border: lightskyblue solid 2.5px;
+        outline: none;
+    }
+}
+
+@media only screen and (min-width: $mobile-media){
+    input {
+        width: 300px;
+    }
+}
+label {
+    margin-bottom: 1rem;
+    text-align: right;
+    span {
+        width: 150px;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: $container-width;
+}
+
+nav {
+    background: $clr1;
 }
