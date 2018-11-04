@@ -55,7 +55,7 @@ export default {
     getMonth(at) {
       // this.$watch
       const month = this.moment(at).format('MMMM');
-      return month.length > 4 ? month.substr(0, 3)+'\'' : month;
+      return month.length > 4 ? month.substr(0, 3) + "'" : month;
     },
     getDate(at) {
       return this.moment(at).format('DD.MM.YY');
@@ -72,8 +72,8 @@ export default {
         ? `<span class="sign">+</span><span class="change-precent-display">${totalChangePrecents.toFixed(
             2
           )}%</span>`
-        : `<span class="sign">-</span><span class="change-precent-display">${Math.abs(
-            totalChangePrecents.toFixed(2)
+        : `<span class="sign">-</span><span class="change-precent-display">${(-totalChangePrecents).toFixed(
+            2
           )}%</span>`;
     }
   },
