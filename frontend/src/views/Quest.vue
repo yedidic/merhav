@@ -28,6 +28,7 @@
         <quest-preview 
           :quest="getQuest(idx)"
           :idx="idx"
+          :isUniq="idx >= exam.quests.length"
           :isFemale="isFemale"
           @ansUpdated="ansUpdated"
          ></quest-preview>
@@ -106,9 +107,7 @@ export default {
       return this.loggedinUser.isFemale;
     }
   },
-  destroyed() {
-    console.log('Quest has been destroyed');
-    
+  destroyed() {    
     this.isSubmitted = true;
     clearInterval(this.timeLeftInterval);
   },

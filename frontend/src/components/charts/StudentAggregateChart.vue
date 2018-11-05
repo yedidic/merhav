@@ -21,7 +21,7 @@ export default {
           labels: this.months,
           datasets: [
             {
-              label: 'ציון מצרפי',
+              label: 'ממוצע מד רגשי',
               data: this.avgs,
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

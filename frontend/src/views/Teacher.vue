@@ -29,7 +29,7 @@
           <p class="t-name">שם</p>
           <p class="pc-only t-month">חודש</p>
           <p class="t-date">תאריך</p>
-          <p class="t-res">תוצאה</p>
+          <p class="t-res">מד רגשי</p>
           <p class="t-change">שינוי</p>
         </header>
           <submissions-content

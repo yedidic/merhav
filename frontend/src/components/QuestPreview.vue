@@ -1,7 +1,11 @@
 <template>
-  <section v-if="quest">
+  <section v-if="quest"
+  :class="['quest-preview', isUniq? 'unique': '']" >
       <div class="quest-img" :style="'background-image: url('+quest.img+')'"></div>
-      <h3>{{questTxt}}</h3>
+      <h2 v-if="isUniq">שאלה אישית</h2>
+      <h3 >
+        {{questTxt}}
+      </h3>
       <div class="ans-container">
         <span>😢</span>
         <range-slider
@@ -24,7 +28,8 @@ export default {
   props: {
     quest: Object,
     idx: Number,
-    isFemale: Boolean
+    isFemale: Boolean,
+    isUniq: Boolean
   },
   data() {
     return {
@@ -48,7 +53,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .quest-img {
   height: 45vh;
   max-width: 100vw;
@@ -74,5 +78,8 @@ export default {
 }
 h3 {
   direction: rtl;
+}
+h3.unique {
+  color: darkgreen;
 }
 </style>

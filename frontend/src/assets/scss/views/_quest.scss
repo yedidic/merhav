@@ -1,6 +1,14 @@
 .quest {
 }
 
+.quest-preview.unique {
+  background: $clr5;
+}
+
+.quest-preview h2{
+  margin: 0 0 1rem;
+}
+
 .countdown {
     z-index: 400; 
     position: fixed;
