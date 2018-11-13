@@ -17,7 +17,7 @@ module.exports = (app) => {
 
     //Query
     app.get(USER_URL, (req, res) => {
-        if (!req.session.loggedinUser) return;
+        if (!!true) return;
         UserService.query()
             .then(users => res.json(users))
     })
