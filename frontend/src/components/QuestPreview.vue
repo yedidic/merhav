@@ -55,6 +55,7 @@ export default {
 <style scoped lang="scss">
 .quest-img {
   height: 45vh;
+  width: 360px;
   max-width: 100vw;
   background-position: center center;
   margin-bottom: 2rem;
