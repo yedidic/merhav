@@ -17,7 +17,7 @@ function getByClassCode(classCode, schoolCode) {
         })
 }
 
-function getByUserTz(userDetails) {
+function loginUser(userDetails) {
     return MongoService.connect()
         .then(db => {
             const collection = db.collection('user')
@@ -94,7 +94,7 @@ function add(user) {
 }
 
 module.exports = {
-    getByUserTz,
+    loginUser,
     query,
     getByClassCode,
     getById,

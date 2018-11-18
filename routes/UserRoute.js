@@ -5,7 +5,7 @@ module.exports = (app) => {
     //Login User
     app.post(USER_URL + '/login', (req, res, handleErr) => {
         var userDetails = req.body;
-        UserService.getByUserTz(userDetails)
+        UserService.loginUser(userDetails)
             .then(user => {
                 delete user.psw;
                 req.session.cookie.maxAge = 60 * 60 * 1000;
@@ -21,6 +21,7 @@ module.exports = (app) => {
         UserService.query()
             .then(users => res.json(users))
     })
+    
     //get By Class
     app.get(USER_URL + '/byClass', (req, res) => {
         const { type } = req.session.loggedinUser;
@@ -28,7 +29,10 @@ module.exports = (app) => {
         const classCode = +req.query.classCode;
         const schoolCode = +req.query.schoolCode;
         UserService.getByClassCode(classCode, schoolCode)
-            .then(users => res.json(users))
+            .then(users => {
+                users.forEach(user => delete user.psw);
+                res.json(users)
+            })
     })
 
 
@@ -38,6 +42,18 @@ module.exports = (app) => {
         const userId = req.params.userId
         UserService.getById(userId)
             .then(user => {
+                delete user.psw
+                res.json(user)
+            })
+    })
+
+    //reloginUser
+    app.get(USER_URL + '/relogin/:userId', (req, res) => {
+        const userId = req.params.userId
+        if (req.session.loggedinUser !== userId) return;
+        UserService.getById(userId)
+            .then(user => {
+                delete user.psw
                 res.json(user)
             })
     })
@@ -48,6 +64,7 @@ module.exports = (app) => {
         let updatedUser = req.body;
         UserService.update(updatedUser)
             .then(user => {
+                delete user.psw;
                 res.json(user)
             })
     })
@@ -76,6 +93,7 @@ module.exports = (app) => {
         const user = req.body;
         UserService.add(user)
             .then(user => {
+                delete user.psw;
                 if (user) res.json(user);
             })
     })
