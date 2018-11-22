@@ -38,3 +38,13 @@ Sunday => 041118{
     4. chart.js - changed format.
     5. chart.js - set the size better.
 }
+
+220419 => {
+    1. MiddleWay -w/ Moshe/Elad.
+    2. At student Page, opts to see his answers from the past(by Quest).
+        #   Maybe implement a new collection called question, where
+            each quest would have an _id, which we could locate and 
+            manage to catch the answers avg faster, using mongoDB.
+    3. The teacher should have an option to see perut of every question.
+    4. Mizzrafi of each quest at the student page.
+}

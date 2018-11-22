@@ -34,6 +34,7 @@
       <router-link to="/student/stats">
         <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
       </router-link>
+
     </div>
   </section>
 </template>

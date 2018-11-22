@@ -1,3 +1,5 @@
+
+
 <template>
 <section class="student-aggregate-chart">
   <canvas id="myChart" width="400" height="400" ref="chart"></canvas>
@@ -58,7 +60,7 @@ export default {
     }
   },
   watch: {
-    '$i18n.locale'() {
+    '$i18n.locale': () => {
       this.renderCanvas();
     }
   },
@@ -76,14 +78,14 @@ export default {
       return this.submissions.map(({ at }) => this.moment(at).format('DD/MM'));
     },
     avgs() {
-      return this.submissions.map(({answers}) => sum(answers) / answers.length);
+      return this.submissions.map(
+        ({ answers }) => sum(answers) / answers.length
+      );
     }
   },
-  created() {    
-  },
+  created() {}
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

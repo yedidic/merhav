@@ -14,12 +14,14 @@
 <template>
   <section class="student-stats">
     <h1>{{isFemale? $t('heading-female', {fullname, hebName}) : $t('heading-male', {fullname, hebName})}}</h1>
-    <studentAggregateChart></studentAggregateChart>
+    <router-link to="/student/stats/aggregate">Aggregate</router-link> |
+    <router-link to="/student/stats/ans-avg">Answer's Average</router-link>
+
+    <router-view/>
   </section>
 </template>
 
 <script>
-import StudentAggregateChart from '@/components/charts/StudentAggregateChart.vue';
 export default {
   data() {
     return {
@@ -38,7 +40,6 @@ export default {
     }
   },
   components: {
-    StudentAggregateChart
   }
 };
 </script>

@@ -16,7 +16,7 @@ export default {
             StorageService.save(LOGGEDIN_USER_KEY, user)
             state.loggedinUser = user;
         },
-        [UNSHIFT_SUBMISSION](state, {submission}){
+        [UNSHIFT_SUBMISSION](state, { submission }) {
             state.loggedinUser.submissions.unshift(submission);
             console.log('user.submissions', state.loggedinUser.submissions)
             StorageService.save(LOGGEDIN_USER_KEY, state.loggedinUser)
@@ -51,7 +51,7 @@ export default {
         [UNSHIFT_SUBMISSION](context, { submission }) {
             const userId = context.getters.loggedinUser._id;
             return UserService.addSubmission(submission, userId)
-                    .then(()=> context.commit({type: UNSHIFT_SUBMISSION, submission}))
+                .then(() => context.commit({ type: UNSHIFT_SUBMISSION, submission }))
         }
 
 
@@ -59,6 +59,9 @@ export default {
     getters: {
         loggedinUser({ loggedinUser }) {
             return loggedinUser;
+        },
+        submissions({ loggedinUser }) {
+            return loggedinUser.submissions;
         }
     }
 };

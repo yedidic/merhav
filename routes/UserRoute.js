@@ -17,7 +17,7 @@ module.exports = (app) => {
 
     //Query
     app.get(USER_URL, (req, res) => {
-        if (!!true) return;
+        if (!!true);
         UserService.query()
             .then(users => res.json(users))
     })
@@ -50,7 +50,7 @@ module.exports = (app) => {
     //reloginUser
     app.get(USER_URL + '/relogin/:userId', (req, res) => {
         const userId = req.params.userId
-        if (req.session.loggedinUser !== userId) return;
+        // if (req.session.loggedinUser !== userId) return;
         UserService.getById(userId)
             .then(user => {
                 delete user.psw
@@ -60,7 +60,7 @@ module.exports = (app) => {
 
     //updateUser
     app.put(USER_URL + '/:userId', (req, res) => {
-        return;
+        return res.end();
         // if (!req.session.loggedinUser) return;
         let updatedUser = req.body;
         UserService.update(updatedUser)
@@ -82,7 +82,7 @@ module.exports = (app) => {
 
     //delete
     app.delete(USER_URL + ':/userId', (req, res) => {
-        return;
+        return res.end();
         if (!req.session.loggedinUser) return;
         const userId = req.params.userId;
         UserService.remove(userId)
@@ -91,7 +91,7 @@ module.exports = (app) => {
 
     //add
     app.post(USER_URL, (req, res) => {
-        return;
+        return res.end();
         if (!req.session.loggedinUser) return;
         const user = req.body;
         UserService.add(user)

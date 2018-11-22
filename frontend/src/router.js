@@ -43,7 +43,17 @@ export default new Router({
     {
       path: '/student/stats',
       name: 'student-stats',
-      component: StudentStats
+      component: StudentStats,
+      children: [
+        {
+          path: 'aggregate',
+          component: () => import('./components/charts/student/StudentAggregateChart.vue')
+        },
+        {
+          path: 'ans-avg',
+          component: () => import('./components/charts/student/StudentAnsAvg.vue')
+        },
+      ]
     },
     {
       path: '/login',
