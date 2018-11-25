@@ -1,5 +1,8 @@
 .home-img {
     max-width: 100%;
     max-height: 60vh;
-    border-radius: 7px;
+    @media screen and (min-width: 600px) {
+        border-radius: 7px;
+        
+}
 }

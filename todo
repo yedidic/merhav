@@ -39,7 +39,7 @@ Sunday => 041118{
     5. chart.js - set the size better.
 }
 
-220419 => {
+221118 => {
     1. MiddleWay -w/ Moshe/Elad.
     2. At student Page, opts to see his answers from the past(by Quest).
         #   Maybe implement a new collection called question, where
@@ -47,4 +47,14 @@ Sunday => 041118{
             manage to catch the answers avg faster, using mongoDB.
     3. The teacher should have an option to see perut of every question.
     4. Mizzrafi of each quest at the student page.
+    5. Code Review.
+}
+
+231118 => {
+    1. Change the db to quest_db and give each quest an Id. each school'd have
+    its desired quests id, instead of examId.
+}
+
+251118 => {
+    1. Maybe add an avatar to user profile.
 }

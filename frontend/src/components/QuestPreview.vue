@@ -58,7 +58,7 @@ export default {
   width: 360px;
   max-width: 100vw;
   background-position: center center;
-  margin-bottom: 2rem;
+  margin: .5rem auto 2rem;
   background-repeat: no-repeat;
 }
 
