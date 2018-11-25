@@ -49,7 +49,7 @@ import QuestPreview from '@/components/QuestPreview.vue';
 export default {
   data() {
     return {
-      submission: { answers: [3, 3, 3, 3, 3, 3, 3], examId: '' },
+      submission: { ansMap: {}, examId: '' },
       timeLeft: 30,
       timeLeftInterval: null,
       isSubmitted: false
@@ -60,18 +60,22 @@ export default {
     this.getExamFromServer(this.loggedinUser.schoolCode);
     this.decreaseTimeLeft();
   },
+  watch: {
+    isSubmitted(newVal) {
+      if (newVal) clearInterval(this.timeLeftInterval);
+    }
+  },
   methods: {
     getExamFromServer(schoolCode) {
       this.$store.dispatch({ type: SET_EXAM, schoolCode });
     },
-    ansUpdated(answer, idx) {
-      this.submission.answers[idx] = answer;
+    ansUpdated(answer, questId) {
+      this.submission.ansMap[questId] = answer;
     },
     submitQuest() {
       if (this.isSubmitted) return;
       this.isSubmitted = true;
       this.submission.examId = this.exam._id;
-      this.submission.uniqQuest = this.loggedinUser.uniqQuest;
       this.submission.at = new Date();
       this.$store
         .dispatch({
@@ -84,15 +88,12 @@ export default {
       if (idx < this.exam.quests.length) {
         return this.exam.quests[idx];
       }
-      return this.loggedinUser.uniqQuest;
+      return this.uniqQuest;
     },
     decreaseTimeLeft() {
       this.timeLeftInterval = setInterval(() => {
         --this.timeLeft;
-        if (this.timeLeft <= 0) {
-          clearInterval(this.timeLeftInterval);
-          this.submitQuest();
-        }
+        if (this.timeLeft <= 0) this.submitQuest();
       }, 1000);
     }
   },
@@ -105,9 +106,12 @@ export default {
     },
     isFemale() {
       return this.loggedinUser.isFemale;
+    },
+    uniqQuest() {
+      return this.$store.getters.uniqQuest;
     }
   },
-  destroyed() {    
+  destroyed() {
     this.isSubmitted = true;
     clearInterval(this.timeLeftInterval);
   },

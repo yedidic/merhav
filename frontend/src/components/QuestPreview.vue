@@ -1,6 +1,6 @@
 <template>
   <section v-if="quest"
-  :class="['quest-preview', isUniq? 'unique': '']" >
+  :class="['quest-preview', isUniq ? 'unique': '']" >
       <div class="quest-img" :style="'background-image: url('+quest.img+')'"></div>
       <h2 v-if="isUniq">שאלה אישית</h2>
       <h3 >
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     ansUpdated() {
-      this.$emit('ansUpdated', this.answer, this.idx);
+      this.$emit('ansUpdated', this.answer, this.quest._id);
     }
   },
   computed: {
@@ -58,7 +58,7 @@ export default {
   width: 360px;
   max-width: 100vw;
   background-position: center center;
-  margin: .5rem auto 2rem;
+  margin: 0.5rem auto 2rem;
   background-repeat: no-repeat;
 }
 
