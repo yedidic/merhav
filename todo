@@ -60,5 +60,9 @@ Sunday => 041118{
 }
 
 Don't forget =>{
-    When coming back to master - change the server.
+    When coming back to master - change the mongo server address.
+}
+
+261118 => {
+    1. Implement a better user catch for unrequired auth;
 }
