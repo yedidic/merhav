@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     reloginUserFromLocalStorage() {
-      console.log('TODO: relogin the user here');
+      console.log('%c TODO: relogin the user here', 'color:lightskyblue;');
       this.$store.dispatch({ type: RELOGIN_USER });
     }
   },

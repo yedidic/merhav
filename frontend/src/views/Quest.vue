@@ -16,22 +16,18 @@
 <template>
   <section class="quest" v-if="exam">
     <p class="countdown">
-      <span class="countdown-label">
-        {{$t('timeLeftLabel')}}
-      </span>
-      <span class="countdown-clock">
-        {{timeLeft}}
-      </span>
+      <span class="countdown-label">{{$t('timeLeftLabel')}}</span>
+      <span class="countdown-clock">{{timeLeft}}</span>
     </p>
-    <div v-for="(answer ,idx) in submission.answers" :key="idx">
-        <h2 class="quest-txt">{{$t('questTxt', {questIdx: idx+1, length: exam.quests.length+1})}}</h2>        
-        <quest-preview 
-          :quest="getQuest(idx)"
-          :idx="idx"
-          :isUniq="idx >= exam.quests.length"
-          :isFemale="isFemale"
-          @ansUpdated="ansUpdated"
-         ></quest-preview>
+    <div v-for="idx in exam.questsIds.length+1" :key="idx">
+      <h2 class="quest-txt">{{$t('questTxt', {questIdx: idx+1, length: exam.questsIds.length+1})}}</h2>
+      <quest-preview
+        :quest="getQuest(idx)"
+        :idx="idx"
+        :isUniq="idx >= exam.quests.length"
+        :isFemale="isFemale"
+        @ansUpdated="ansUpdated"
+      ></quest-preview>
     </div>
     <button class="browse-btn btn" @click="submitQuest">{{$t('finish')}}</button>
   </section>
@@ -49,20 +45,21 @@ import QuestPreview from '@/components/QuestPreview.vue';
 export default {
   data() {
     return {
-      submission: { ansMap: {}, examId: '' },
+      submission: { ansMap: {}, examId: "" },
       timeLeft: 30,
       timeLeftInterval: null,
       isSubmitted: false
     };
   },
   created() {
-    if (!this.loggedinUser) this.$router.push('/');
+    if (!this.loggedinUser) this.$router.push("/");
     this.getExamFromServer(this.loggedinUser.schoolCode);
     this.decreaseTimeLeft();
   },
   watch: {
     isSubmitted(newVal) {
       if (newVal) clearInterval(this.timeLeftInterval);
+      this.setAvg();
     }
   },
   methods: {
@@ -72,17 +69,26 @@ export default {
     ansUpdated(answer, questId) {
       this.submission.ansMap[questId] = answer;
     },
+    setAvg() {
+      const sum = 0;
+      for (const ans in this.submission.ansMap) {
+        sum += ans[Object.keys(ans)[0]];
+      }
+      this.submission.avg = sum / Object.keys(this.submission.ansMap).length;
+    },
     submitQuest() {
       if (this.isSubmitted) return;
       this.isSubmitted = true;
+      this.setAvg();
       this.submission.examId = this.exam._id;
       this.submission.at = new Date();
-      this.$store
-        .dispatch({
-          type: UNSHIFT_SUBMISSION,
-          submission: this.submission
-        })
-        .then(() => this.$router.push('/student/quest/success'));
+      console.log('submission', this.submission)
+      // this.$store
+      //   .dispatch({
+      //     type: UNSHIFT_SUBMISSION,
+      //     submission: this.submission
+      //   })
+      //   .then(() => this.$router.push('/student/quest/success'));
     },
     getQuest(idx) {
       if (idx < this.exam.quests.length) {

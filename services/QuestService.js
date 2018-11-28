@@ -24,7 +24,8 @@ function update(quest) {
     return MongoService.connect()
         .then(db => {
             const collection = db.collection('quest')
-            return collection.findOneAndUpdate({ _id: quest._id }, { $set: {quest} })
+            return collection.findOneAndUpdate({ _id: quest._id }, { $set: quest })
+                .then(() => quest)
         })
 }
 
@@ -33,13 +34,13 @@ function add(quest) {
     return MongoService.connect()
         .then(db => {
             const collection = db.collection('quest')
-            return collection.insertOne({ quest })
+            return collection.insertOne(quest)
                 .then(({ insertedId }) => ({ ...quest, _id: insertedId }))
         })
 }
 
 function remove(questId) {
-    
+
     questId = new ObjectId(questId)
     return MongoService.connect()
         .then(db => {

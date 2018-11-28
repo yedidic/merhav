@@ -48,13 +48,13 @@ h1 {
 }
 
 input {
-    border: $clr1 solid .1rem;
+    border: $clr1 solid .115rem;
     width: 150px;
     border-radius: 89988px;
     font-family: inherit;
     padding: .5rem 1rem;
     &:focus {
-        border: lightskyblue solid 2.5px;
+        border-color: lightskyblue;
         outline: none;
     }
 }
