@@ -1,6 +1,5 @@
 <template>
   <section class="student-ans-avg">
-    <h3>Student Answer's Average</h3>
     <carousel class="ltr" :autoplay="true" :perPage="1" v-if="quests">
       <slide v-for="(ans, ansId) in avgMap" :key="ansId" class="slide">
         <avg-by-ans :ans="ans" :quest="getQuest(ansId)"></avg-by-ans>

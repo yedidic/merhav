@@ -12,15 +12,13 @@
 <template>
   <section class="teacher" v-if="user">
     <greeting-user
-    :isFemale="user.isFemale"
-    :fullname="user.fullname"
-    :hebName="user.hebName"
-    :lastVisit="user.lastVisit"
+      :isFemale="user.isFemale"
+      :fullname="user.fullname"
+      :hebName="user.hebName"
+      :lastVisit="user.lastVisit"
     ></greeting-user>
-    
-    <headmaster-section 
-    v-if="isHeadmaster"
-    @chooseClass="chooseClass"/>
+
+    <headmaster-section v-if="isHeadmaster" @chooseClass="chooseClass"/>
 
     <div class="actions-container flex-col align-center">
       <section class="students-table" v-if="students.length > 0">
@@ -32,56 +30,62 @@
           <p class="t-res">מד רגשי</p>
           <p class="t-change">שינוי</p>
         </header>
-          <submissions-content
-            v-for="student in students"
-            :hebName="student.hebName"
-            :submissions="student.submissions"
-            :studentId="student._id"
-            :key="student._id"
-          >
-          </submissions-content>
+        <submissions-content
+          v-for="student in students"
+          :hebName="student.hebName"
+          :submissions="student.submissions"
+          :studentId="student._id"
+          :isFemale="student.isFemale"
+          :key="student._id"
+          @toggleModal="toggleModal"
+        ></submissions-content>
       </section>
     </div>
-      <!-- TODO: maybe emulate few secs to wait here -->
-    <!-- <router-link to="/student/stats">
-      <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
-    </router-link> -->
+    <modal v-if="modalData" :data="modalData" @toggleModal="toggleModal"/>
   </section>
 </template>
 
 <script>
-import UserService from '../services/UserService.js';
+import UserService from "../services/UserService.js";
 
-import GreetingUser from '@/components/GreetingUser.vue';
-import HeadmasterSection from '@/components/Teacher/HeadmasterSection.vue';
-import SubmissionsContent from '@/components/Teacher/SubmissionsContent.vue';
+import Modal from "@/components/Modal.vue";
+import GreetingUser from "@/components/GreetingUser.vue";
+import HeadmasterSection from "@/components/Teacher/HeadmasterSection.vue";
+import SubmissionsContent from "@/components/Teacher/SubmissionsContent.vue";
+import { GET_QUESTS } from "@/modules/QuestModule";
 
 export default {
   data() {
     return {
       students: [],
       openeds: [],
-      classCode: null
+      classCode: null,
+      modalData: null
     };
   },
   computed: {
     lastVisitDate() {
       let d = new Date(this.user.lastVisit);
-      return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+      return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
     },
     user() {
       return this.$store.getters.loggedinUser;
     },
     isHeadmaster() {
-      return this.user.type === 'h';
+      return this.user.type === "h";
     }
   },
   created() {
     if (!this.isHeadmaster) {
       this.loadStudents(this.user.classCode);
     }
+    this.$store.dispatch({ type: GET_QUESTS });
   },
   methods: {
+    toggleModal(modalData) {
+      console.log(modalData);
+      this.modalData = modalData;
+    },
     chooseClass(classCode) {
       if (!this.isHeadmaster) return;
       this.loadStudents(classCode);
@@ -109,6 +113,7 @@ export default {
     }
   },
   components: {
+    Modal,
     SubmissionsContent,
     GreetingUser,
     HeadmasterSection
@@ -117,7 +122,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .actions-container button {
   width: 300px;
   height: 3rem;

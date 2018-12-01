@@ -15,6 +15,7 @@
   <section class="student-stats">
     <h1>{{isFemale? $t('heading-female', {fullname, hebName}) : $t('heading-male', {fullname, hebName})}}</h1>
     <router-link to="/student/stats/aggregate">Aggregate</router-link> |
+    <router-link to="/student/stats/ans-avg" >Answer's Average</router-link> |
     <router-link to="/student/stats/ans-avg" >Answer's Average</router-link>
 
     <router-view/>
