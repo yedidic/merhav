@@ -19,16 +19,16 @@
       <span class="countdown-label">{{$t('timeLeftLabel')}}</span>
       <span class="countdown-clock">{{timeLeft}}</span>
     </p>
-    <div v-for="idx in exam.questsIds.length+1" :key="idx">
-      <h2 class="quest-txt">{{$t('questTxt', {questIdx: idx+1, length: exam.questsIds.length+1})}}</h2>
-      <quest-preview
-        :quest="getQuest(idx)"
-        :idx="idx"
-        :isUniq="idx >= exam.quests.length"
-        :isFemale="isFemale"
-        @ansUpdated="ansUpdated"
-      ></quest-preview>
-    </div>
+    <quest-preview
+      v-for="idx in exam.questsIds.length+1"
+      :key="idx"
+      :title="$t('questTxt', {questIdx: idx, length: exam.questsIds.length+1})"
+      :quest="getQuest(idx-1)"
+      :idx="idx-1"
+      :isUniq="idx-1 >= exam.questsIds.length"
+      :isFemale="isFemale"
+      @ansUpdated="ansUpdated"
+    ></quest-preview>
     <button class="browse-btn btn" @click="submitQuest">{{$t('finish')}}</button>
   </section>
 </template>
@@ -38,10 +38,17 @@
 // optional: do it with routerLink. each quest gets an idx till you come to the end.
 // in sec thought sounds better to just load all the quests here
 //  and change the currIdx for each NextQuest click.
-import { SET_EXAM } from '../modules/ExamModule';
-import { UPDATE_USER, UNSHIFT_SUBMISSION } from '../modules/UserModule';
-import QuestPreview from '@/components/QuestPreview.vue';
+import { SET_EXAM } from "../modules/ExamModule";
+import { UPDATE_USER, UNSHIFT_SUBMISSION } from "../modules/UserModule";
+import QuestPreview from "@/components/QuestPreview.vue";
 
+const objValsSumAndAvg = obj => {
+  let sum = 0;
+  for (const key in obj) {
+    sum += obj[key];
+  }
+  return { sum, avg: sum / Object.keys(obj).length };
+};
 export default {
   data() {
     return {
@@ -70,11 +77,8 @@ export default {
       this.submission.ansMap[questId] = answer;
     },
     setAvg() {
-      const sum = 0;
-      for (const ans in this.submission.ansMap) {
-        sum += ans[Object.keys(ans)[0]];
-      }
-      this.submission.avg = sum / Object.keys(this.submission.ansMap).length;
+      const { avg } = objValsSumAndAvg(this.submission.ansMap);
+      this.submission.avg = avg;
     },
     submitQuest() {
       if (this.isSubmitted) return;
@@ -82,13 +86,13 @@ export default {
       this.setAvg();
       this.submission.examId = this.exam._id;
       this.submission.at = new Date();
-      console.log('submission', this.submission)
-      // this.$store
-      //   .dispatch({
-      //     type: UNSHIFT_SUBMISSION,
-      //     submission: this.submission
-      //   })
-      //   .then(() => this.$router.push('/student/quest/success'));
+      console.log("submission", this.submission);
+      this.$store
+        .dispatch({
+          type: UNSHIFT_SUBMISSION,
+          submission: this.submission
+        })
+        .then(() => this.$router.push("/student/quest/success"));
     },
     getQuest(idx) {
       if (idx < this.exam.quests.length) {

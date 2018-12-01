@@ -23,11 +23,9 @@
       <router-link to="/student/quest">
         <button class="btn quest-btn">{{$t('goToQuest', {female: user.isFemale? 'י': ''})}}</button>
       </router-link>
-      <!-- TODO: maybe emulate few secs to wait here -->
       <router-link to="/student/stats">
         <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
       </router-link>
-
     </div>
   </section>
 </template>
