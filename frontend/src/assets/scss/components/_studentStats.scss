@@ -107,6 +107,18 @@ p.change-precent {
     }
 }
 
+p.t-res {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+        padding: 0 .7rem;
+        width: 1.5rem;
+        float: left;
+    }
+}
+
 .increase p {
     background: darkgreen;
     color: white;

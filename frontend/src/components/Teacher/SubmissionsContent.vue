@@ -15,8 +15,10 @@
       <p class="t-date">{{getDate(submission.at)}}</p>
       <!-- How to watch the i18n here? -->
       <p class="t-res" @click.stop="expandInfo(submission)">
-        {{submissionAvg(submission)}}
-        <i class="fas fa-expand"></i>
+        <span>{{submissionAvg(submission)}}</span>
+        <span>
+          <i class="fas fa-expand"></i>
+        </span>
       </p>
       <p
         class="t-change change-precent flex"
@@ -27,6 +29,8 @@
 </template>
 
 <script>
+import QuestService from '@/services/QuestService';
+import Bus, {OPEN_MODAL} from "@/services/EventBusService";
 const objValsSumAndAvg = obj => {
   let sum = 0;
   for (const key in obj) {
@@ -50,10 +54,19 @@ export default {
   },
   methods: {
     expandInfo(submission) {
-      this.$emit("toggleModal", {
-        submission,
-        isFemale: this.isFemale,
-        quests: this.$store.getters.quests
+      const ansIds = Object.keys(submission.ansMap);
+      QuestService.getByIds(ansIds).then(quests => {
+        const qAndAns = quests.map(quest => ({
+          ...quest,
+          ans: submission.ansMap[quest._id]
+        }));
+        Bus.$emit(OPEN_MODAL, {
+          at: submission.at,
+          isFemale: this.isFemale,
+          qAndAns,
+          hebName: this.hebName,
+          fixedAvg: submission.avg.toFixed(2)
+        });
       });
     },
     isIncrease(idx) {

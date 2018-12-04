@@ -8,6 +8,14 @@ function query() {
             return collection.find({}).toArray();
         })
 }
+function getByIds(ids) {
+    ids = ids.map(id => ObjectId(id))
+    return MongoService.connect()
+        .then(db => {
+            const collection = db.collection('quest')
+            return collection.find({ _id: { $in: ids } }).toArray();
+        })
+}
 
 function getById(questId) {
     questId = new ObjectId(questId)
@@ -55,6 +63,7 @@ module.exports = {
     add,
     query,
     update,
-    getById
+    getById,
+    getByIds
 }
 

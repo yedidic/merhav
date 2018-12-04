@@ -1,5 +1,5 @@
 <template>
-  <section class="student-ans-avg">
+  <section class="student-ans-avg" v-if="quests">
     <carousel class="ltr" :autoplay="true" :perPage="1" v-if="quests">
       <slide v-for="(ans, ansId) in avgMap" :key="ansId" class="slide">
         <avg-by-ans :ans="ans" :quest="getQuest(ansId)"></avg-by-ans>
@@ -9,17 +9,25 @@
 </template>
 
 <script>
-import { GET_QUESTS } from "@/modules/QuestModule";
+import QuestService from "@/services/QuestService";
 import { Carousel, Slide } from "vue-carousel";
 import avgByAns from "@/components/charts/student/sub/AvgByAns.vue";
 export default {
+  data() {
+    return {
+      quests: null
+    };
+  },
   components: {
     Carousel,
     Slide,
     avgByAns
   },
   created() {
-    this.$store.dispatch({ type: GET_QUESTS, ids: Object.keys(avgByAns) });
+    const ids = Object.keys(this.avgMap);
+    QuestService.getByIds(ids).then(
+      quests => (this.quests = quests)
+    );
   },
   methods: {
     getQuest(id) {
@@ -40,14 +48,10 @@ export default {
         }
         return acc;
       }, {});
-    },
-    quests() {
-      return this.$store.getters.quests;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

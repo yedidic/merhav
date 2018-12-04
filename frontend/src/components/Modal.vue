@@ -1,25 +1,23 @@
+<i18n>
+{
+  "he":{
+    "close": "סגור"
+  },
+  "en": {
+    "close": "Close"
+  }
+}
+</i18n>
+
 <template>
   <transition name="modal">
     <div class="modal-mask" @click="$emit('toggleModal', null)">
       <div class="modal-wrapper">
         <div class="modal-container" @click.stop>
-          <pre>
-              {{data}}
-          </pre>
-          <!-- <div class="modal-header">
-            <slot name="header">default header</slot>
+          <div class="modal-slot">
+            <slot></slot>
           </div>
-
-          <div class="modal-body">
-            <slot name="body">default body</slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-            </slot>
-          </div>-->
-          <button @click="$emit('toggleModal', null)">OK</button>
+          <button @click="$emit('toggleModal', null)">{{$t('close')}}</button>
         </div>
       </div>
     </div>
@@ -28,12 +26,18 @@
 
 <script>
 export default {
-  props: {
-    data: {
-      type: Object,
-      default: {}
+  methods: {
+    handleEscape({ key }) {
+      if (key === "Escape") this.$emit("toggleModal", null);
     }
-  }
+  },
+  created() {
+    document.addEventListener("keyup", this.handleEscape);
+  },
+  destroyed() {
+    document.removeEventListener("keyup", this.handleEscape);
+  },
+  computed: {}
 };
 </script>
 <style lang="scss" scoped>
@@ -44,9 +48,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -55,14 +59,18 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
+  width: 92vw;
+  max-width: 650px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+}
+
+.modal-slot {
+  margin-bottom: 1rem;
 }
 
 .modal-header h3 {
@@ -100,6 +108,8 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
+button {
+  font-size: 1.2rem;
+}
 </style>
 

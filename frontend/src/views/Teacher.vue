@@ -37,18 +37,14 @@
           :studentId="student._id"
           :isFemale="student.isFemale"
           :key="student._id"
-          @toggleModal="toggleModal"
         ></submissions-content>
       </section>
     </div>
-    <modal v-if="modalData" :data="modalData" @toggleModal="toggleModal"/>
   </section>
 </template>
 
 <script>
 import UserService from "../services/UserService.js";
-
-import Modal from "@/components/Modal.vue";
 import GreetingUser from "@/components/GreetingUser.vue";
 import HeadmasterSection from "@/components/Teacher/HeadmasterSection.vue";
 import SubmissionsContent from "@/components/Teacher/SubmissionsContent.vue";
@@ -60,7 +56,6 @@ export default {
       students: [],
       openeds: [],
       classCode: null,
-      modalData: null
     };
   },
   computed: {
@@ -82,10 +77,6 @@ export default {
     this.$store.dispatch({ type: GET_QUESTS });
   },
   methods: {
-    toggleModal(modalData) {
-      console.log(modalData);
-      this.modalData = modalData;
-    },
     chooseClass(classCode) {
       if (!this.isHeadmaster) return;
       this.loadStudents(classCode);
@@ -113,7 +104,6 @@ export default {
     }
   },
   components: {
-    Modal,
     SubmissionsContent,
     GreetingUser,
     HeadmasterSection

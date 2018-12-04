@@ -9,6 +9,12 @@ module.exports = (app) => {
             .then(quests => res.json(quests))
     })
 
+    //getByIds
+    app.put(QUEST_URL + '/ids', (req, res) => {
+        QuestService.getByIds(req.body)
+            .then(quests => res.json(quests))
+    })
+
 
     //getById
     app.get(QUEST_URL + '/:questId', (req, res) => {
@@ -27,8 +33,8 @@ module.exports = (app) => {
     //deleteQuest
     app.delete(QUEST_URL + '/:questId', (req, res) => {
         const questId = req.params.questId;
-        console.log({questId});
-        
+        console.log({ questId });
+
         QuestService.remove(questId)
             .then(() => res.end(`Quest ${questId} was Deleted successfully`));
     })

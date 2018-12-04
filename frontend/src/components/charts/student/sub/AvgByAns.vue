@@ -21,7 +21,6 @@ export default {
       return this.ans.avg.toFixed(2);
     },
     bgImg() {
-        console.log(this.quest)
       return {
           background: `url(${this.quest.img}) no-repeat center center`
       };
