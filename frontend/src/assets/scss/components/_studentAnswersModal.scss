@@ -15,10 +15,10 @@
 
 .modal-q-ans {
     font-weight: 700;
+    padding: 0 0.75rem;
     margin: 0 1rem 0 1rem;
     justify-content: center;
     border-radius: 8px;
-    width: 2rem;
     height: 2rem;
     background: lighten($clr5, 2%);
     &.danger {
@@ -34,5 +34,6 @@
 
 p.modal-q-ans {
     margin: 0 1rem 0 0;
-    width: 2.8rem;
-  }
+    padding: 0 .5rem;
+    color: $clr1;
+}

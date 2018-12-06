@@ -23,6 +23,7 @@ export default {
       modalData: null
     };
   },
+
   created() {
     this.$i18n.locale = "he";
     this.moment.locale("he");
@@ -36,6 +37,8 @@ export default {
       this.$store.dispatch({ type: RELOGIN_USER });
     },
     toggleModal(modalData) {
+      document.body.classList.remove("stop-scrolling");
+      if (modalData) document.body.classList.add("stop-scrolling");
       this.modalData = modalData;
     }
   },

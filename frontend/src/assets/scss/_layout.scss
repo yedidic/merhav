@@ -16,6 +16,11 @@ body {
   font-family: 'Rubik';
 }
 
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
 button {
     cursor: pointer;
     font-family: inherit;
@@ -133,7 +138,7 @@ table {
     font-weight: 700;
     justify-content: center;
     border-radius: 8px;
-    padding: 0 .2rem;
+    padding: .1rem .4rem;
     background: $clr5;
     &.danger {
         background: darkred;
