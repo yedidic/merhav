@@ -48,6 +48,7 @@ export default {
       return this.$store.getters.loggedinUser;
     },
     isHeadmaster() {
+      if(!this.user) return false
       return this.user.type === "h";
     }
   },
