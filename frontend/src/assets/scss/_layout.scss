@@ -123,8 +123,8 @@ table {
         background: $clr5;
     }
     tr:hover td{
-        background: $clr4;
-        color: $clr2; 
+        background: darken($clr5, 4%);
+        // color: $clr2; 
     }
   }
 
