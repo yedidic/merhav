@@ -62,6 +62,10 @@ export default {
   width: 100%;
   max-width: 500px;
   cursor: pointer;
+    &:hover{
+      color: $clr7;
+      background: $clr2;
+    }
 }
 
 .student-preview-name {
