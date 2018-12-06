@@ -1,14 +1,13 @@
 
 
 <template>
-<section class="student-aggregate-chart">
-  <canvas id="myChart" width="400" height="400" ref="chart"></canvas>
-</section>
+  <section class="student-aggregate-chart">
+    <canvas id="myChart" width="400" height="400" ref="chart"></canvas>
+  </section>
 </template>
 
 <script>
-import Chart from 'chart.js';
-const sum = arr => arr.reduce((acc, val) => acc + val);
+import Chart from "chart.js";
 export default {
   data() {
     return {
@@ -18,34 +17,25 @@ export default {
   methods: {
     renderCanvas() {
       this.chart = new Chart(this.$refs.chart, {
-        type: 'line',
+        type: "line",
         data: {
           labels: this.months,
           datasets: [
             {
-              label: 'ממוצע מד רגשי',
+              label: "ממוצע מד רגשי",
               data: this.avgs,
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                "rgba(255, 99, 132, 0.2)",
               ],
               borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                "rgba(255,99,132,1)",
               ],
               borderWidth: 1
             }
           ]
         },
         options: {
+          responsive: true,
           scales: {
             yAxes: [
               {
@@ -60,7 +50,7 @@ export default {
     }
   },
   watch: {
-    '$i18n.locale': () => {
+    ['$i18n.locale'](){
       this.renderCanvas();
     }
   },
@@ -75,12 +65,10 @@ export default {
     },
     months() {
       this.$i18n.locale; // To update the months on locale change
-      return this.submissions.map(({ at }) => this.moment(at).format('DD/MM'));
+      return this.submissions.map(({ at }) => this.moment(at).format("DD/MM"));
     },
     avgs() {
-      return this.submissions.map(
-        ({ answers }) => sum(answers) / answers.length
-      );
+      return this.submissions.map(({ avg }) => avg);
     }
   },
   created() {}
@@ -88,4 +76,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+canvas {
+  height: 50vh;
+  margin: 0 auto;
+}
 </style>

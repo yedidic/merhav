@@ -62,6 +62,12 @@ export default {
         },
         submissions({ loggedinUser }) {
             return loggedinUser.submissions;
+        },
+        uniqQuest({ loggedinUser }) {
+            return loggedinUser.uniqQuest;
+        },
+        isFemale({loggedinUser}){
+            return loggedinUser.isFemale;
         }
     }
 };

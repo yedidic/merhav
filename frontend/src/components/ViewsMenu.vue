@@ -10,8 +10,8 @@
   "he":{
     "home": "דף הבית",
     "about": "עלינו",
-    "login": "התחבר",
-    "logout": "התנתק",
+    "login": "התחבר{yudIfFemale}",
+    "logout": "התנתק{yudIfFemale}",
     "myPage": "עמוד אישי"
   }
 }
@@ -28,7 +28,7 @@
         <li>
             <router-link to="/login">
             <span>
-                {{$t(loginMode)}}
+                {{$t(loginMode, {yudIfFemale})}}
             </span>
             </router-link>
         </li>
@@ -47,7 +47,12 @@ export default {
     myPage: String,
     loginMode: String
   },
-  components:{
+  components: {},
+  computed: {
+    yudIfFemale() {
+      if (!this.user) return '/י';
+      return this.user.isFemale ? 'י' : '';
+    }
   }
 };
 </script>

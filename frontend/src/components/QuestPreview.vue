@@ -1,49 +1,52 @@
 <template>
-  <section v-if="quest"
-  :class="['quest-preview', isUniq? 'unique': '']" >
-      <div class="quest-img" :style="'background-image: url('+quest.img+')'"></div>
-      <h2 v-if="isUniq">שאלה אישית</h2>
-      <h3 >
-        {{questTxt}}
-      </h3>
-      <div class="ans-container">
-        <span>😢</span>
-        <range-slider
-          class="slider"
-          min="1"
-          max="5"
-          step="1"
-          v-model="answer"
-          @change="ansUpdated"></range-slider>
-        <span>😄</span>
-      </div>
+  <section v-if="quest" :class="['quest-preview', isUniq ? 'unique': '']">
+    <h2 class="quest-txt">{{title}}</h2>
+    <div class="quest-img" :style="bgImage"></div>
+    <h2 v-if="isUniq" class="uniq-quest">שאלה אישית</h2>
+    <h3>{{questTxt}}</h3>
+    <div class="ans-container">
+      <span>😢</span>
+      <range-slider class="slider" min="1" max="5" step="1" v-model="answer" @change="ansUpdated"></range-slider>
+      <span>😄</span>
+    </div>
   </section>
 </template>
 
 <script>
-import RangeSlider from 'vue-range-slider';
+import RangeSlider from "vue-range-slider";
 
 export default {
-  name: 'QuestPreview',
+  name: "QuestPreview",
   props: {
     quest: Object,
     idx: Number,
     isFemale: Boolean,
-    isUniq: Boolean
+    isUniq: Boolean,
+    title: String
   },
   data() {
     return {
       answer: 3
     };
   },
+  created() {
+    this.ansUpdated();
+  },
   methods: {
     ansUpdated() {
-      this.$emit('ansUpdated', this.answer, this.idx);
+      this.$emit("ansUpdated", this.answer, this.quest._id);
     }
   },
   computed: {
     questTxt() {
       return this.isFemale ? this.quest.female : this.quest.male;
+    },
+    bgImage() {
+      return (
+        "background-image: url(" +
+        require(`@/assets/img/quest/${this.idx % 11}.jpg`) +
+        ")"
+      );
     }
   },
   components: {
@@ -53,34 +56,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.quest-img {
-  height: 45vh;
-  width: 360px;
-  max-width: 100vw;
-  background-position: center center;
-  margin: .5rem auto 2rem;
-  background-repeat: no-repeat;
-}
-
-.ans-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3rem;
-  span {
-    font-size: 2rem;
-  }
-
-  .slider {
-    width: 75vw;
-    max-width: 300px;
-    height: 2rem;
-  }
-}
-h3 {
-  direction: rtl;
-}
-h3.unique {
-  color: darkgreen;
-}
 </style>

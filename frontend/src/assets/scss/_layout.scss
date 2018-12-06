@@ -19,7 +19,7 @@ body {
 button {
     cursor: pointer;
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border-radius: 99999999px;
     border: $clr1 1px solid;
     color: $clr1;
@@ -27,6 +27,7 @@ button {
     width: fit-content;
     padding: 5px 20px;
     transition: all .7s;
+    margin-bottom: .5rem;
 }
 
 button:hover {
@@ -48,13 +49,13 @@ h1 {
 }
 
 input {
-    border: $clr1 solid .1rem;
+    border: $clr1 solid .115rem;
     width: 150px;
     border-radius: 89988px;
     font-family: inherit;
     padding: .5rem 1rem;
     &:focus {
-        border: lightskyblue solid 2.5px;
+        border-color: lightskyblue;
         outline: none;
     }
 }
@@ -83,11 +84,63 @@ nav {
 }
 
 h3 {
-    margin: .7rem auto;
+    margin: .7rem auto 1rem;
 }
 
 select {
     border-radius: 89909px;
     font-size: 1.2rem;
     font-family: 'Rubik';
+}
+
+.hr {
+    height:2px;
+    background: $clr5;
+    margin: 4px 0;
+}
+
+table {
+    text-align: center;
+    margin: 0 auto .1rem;
+    width: 100%;
+    max-width: 500px;
+    td {
+        border-radius: 3px;
+    }
+    padding: 0 10px;
+  }
+
+  thead {
+      td{
+          background: $clr1;
+      }
+      color: $clr2;
+      font-weight: 700;
+  }
+
+  tbody {
+    td {
+        background: $clr5;
+    }
+    tr:hover td{
+        background: $clr4;
+        color: $clr2; 
+    }
+  }
+
+  .avg-display {
+    color: $clr1;
+    font-weight: 700;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 0 .2rem;
+    background: $clr5;
+    &.danger {
+        background: darkred;
+        color: white;
+    }
+    &.success {
+        background: darkgreen;
+        color: white;
+    }
   }

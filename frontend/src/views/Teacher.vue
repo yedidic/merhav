@@ -12,54 +12,29 @@
 <template>
   <section class="teacher" v-if="user">
     <greeting-user
-    :isFemale="user.isFemale"
-    :fullname="user.fullname"
-    :hebName="user.hebName"
-    :lastVisit="user.lastVisit"
+      :isFemale="user.isFemale"
+      :fullname="user.fullname"
+      :hebName="user.hebName"
+      :lastVisit="user.lastVisit"
     ></greeting-user>
-    
-    <headmaster-section 
-    v-if="isHeadmaster"
-    @chooseClass="chooseClass"/>
 
-    <div class="actions-container flex-col align-center">
-      <section class="students-table" v-if="students.length > 0">
-        <header class="table-header submission-row flex">
-          <p class="expand-btn"></p>
-          <p class="t-name">שם</p>
-          <p class="pc-only t-month">חודש</p>
-          <p class="t-date">תאריך</p>
-          <p class="t-res">מד רגשי</p>
-          <p class="t-change">שינוי</p>
-        </header>
-          <submissions-content
-            v-for="student in students"
-            :hebName="student.hebName"
-            :submissions="student.submissions"
-            :studentId="student._id"
-            :key="student._id"
-          >
-          </submissions-content>
-      </section>
-    </div>
-      <!-- TODO: maybe emulate few secs to wait here -->
-    <!-- <router-link to="/student/stats">
-      <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
-    </router-link> -->
+    <headmaster-section v-if="isHeadmaster" @chooseClass="chooseClass"/>
+
+    <students-accordion v-if="students" :students="students"></students-accordion>
   </section>
 </template>
 
 <script>
-import UserService from '../services/UserService.js';
-
-import GreetingUser from '@/components/GreetingUser.vue';
-import HeadmasterSection from '@/components/Teacher/HeadmasterSection.vue';
-import SubmissionsContent from '@/components/Teacher/SubmissionsContent.vue';
+import UserService from "../services/UserService.js";
+import GreetingUser from "@/components/GreetingUser.vue";
+import HeadmasterSection from "@/components/Teacher/HeadmasterSection.vue";
+import StudentsAccordion from "@/components/Teacher/StudentsAccordion.vue";
+import { GET_QUESTS } from "@/modules/QuestModule";
 
 export default {
   data() {
     return {
-      students: [],
+      students: null,
       openeds: [],
       classCode: null
     };
@@ -67,19 +42,20 @@ export default {
   computed: {
     lastVisitDate() {
       let d = new Date(this.user.lastVisit);
-      return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+      return d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
     },
     user() {
       return this.$store.getters.loggedinUser;
     },
     isHeadmaster() {
-      return this.user.type === 'h';
+      return this.user.type === "h";
     }
   },
   created() {
     if (!this.isHeadmaster) {
       this.loadStudents(this.user.classCode);
     }
+    this.$store.dispatch({ type: GET_QUESTS });
   },
   methods: {
     chooseClass(classCode) {
@@ -109,7 +85,7 @@ export default {
     }
   },
   components: {
-    SubmissionsContent,
+    StudentsAccordion,
     GreetingUser,
     HeadmasterSection
   }
@@ -117,7 +93,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .actions-container button {
   width: 300px;
   height: 3rem;

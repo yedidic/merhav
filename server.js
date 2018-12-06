@@ -34,11 +34,10 @@ app.use(
 app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/baba', (req, res) => res.send('Hello BabaJi!'));
 
-const UserRoute = require('./routes/UserRoute');
-UserRoute(app);
+require('./routes/UserRoute')(app);
+require('./routes/ExamRoute')(app);
+require('./routes/QuestRoute')(app);
 
-const ExamRoute = require('./routes/ExamRoute');
-ExamRoute(app);
 
 
 const port = process.env.PORT || 3000;

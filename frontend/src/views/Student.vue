@@ -1,18 +1,12 @@
 <i18n>
 {
   "en": {
-    "hello-female": "Hello {fullname}, welcome to our special app.",
-    "hello-male": "Hello {fullname}, welcome to our special app.",
     "goToQuest": "Go To Quest!",
-    "myOwnStatistics": "My Own Statistics",
-    "lastVisitApp": "You last visited MERHAV at {lastVisitDate}"
+    "myOwnStatistics": "My Own Statistics"
   },
   "he" :{
-    "hello-female": "שלום {hebName}, ברוכה הבאה לאפליקציית מרח\"ב!",
-    "hello-male": "שלום {hebName}, ברוך הבא לאפליקציית מרח\"ב!",
     "goToQuest": "מלא{female} את השאלון!",
-    "myOwnStatistics": "הסטטיסטיקות האישיות שלי",
-    "lastVisitApp": "ביקרת לאחרונה באפליקציה בתאריך {lastVisitDate} "
+    "myOwnStatistics": "הסטטיסטיקות האישיות שלי"
   }
 }
 </i18n>
@@ -23,18 +17,15 @@
     :isFemale="user.isFemale"
     :fullname="user.fullname"
     :hebName="user.hebName"
-    :lastVisit="user.lastVisit"
-    ></greeting-user>
+    :lastVisit="user.lastVisit"/>
     
     <div class="actions-container flex-col">
       <router-link to="/student/quest">
         <button class="btn quest-btn">{{$t('goToQuest', {female: user.isFemale? 'י': ''})}}</button>
       </router-link>
-      <!-- TODO: maybe emulate few secs to wait here -->
       <router-link to="/student/stats">
         <button class="btn stats-btn">{{$t('myOwnStatistics')}}</button>
       </router-link>
-
     </div>
   </section>
 </template>

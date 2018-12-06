@@ -1,34 +1,42 @@
 <template>
   <div id="app" :class="{rtl: locale==='he'}">
-      <nav-bar
-      :user="user"
-      :myPage="getMyPageByUserType"
-      :loginMode="login"
-      ></nav-bar>
-      
-      <router-view/>
+    <nav-bar :user="user" :myPage="getMyPageByUserType" :loginMode="login"></nav-bar>
+
+    <router-view/>
+    <modal v-if="modalData" @toggleModal="toggleModal">
+      <student-answers-modal :data="modalData"></student-answers-modal>
+    </modal>
   </div>
 </template>
 
 
 <script>
-import { RELOGIN_USER } from './modules/UserModule';
-import NavBar from './components/NavBar.vue';
+import Modal from "@/components/Modal.vue";
+import StudentAnswersModal from "@/components/Teacher/StudentAnswersModal.vue";
+import Bus, { OPEN_MODAL } from "@/services/EventBusService";
+import { RELOGIN_USER } from "./modules/UserModule";
+import NavBar from "./components/NavBar.vue";
 export default {
   data() {
     return {
-      locale: 'he'
+      locale: "he",
+      modalData: null
     };
   },
   created() {
-    this.$i18n.locale = 'he';
-    this.moment.locale('he');
+    this.$i18n.locale = "he";
+    this.moment.locale("he");
     this.reloginUserFromLocalStorage();
+
+    Bus.$on(OPEN_MODAL, this.toggleModal);
   },
   methods: {
     reloginUserFromLocalStorage() {
-      console.log('TODO: relogin the user here');
+      console.log("%c TODO: relogin the user here", "color:lightskyblue;");
       this.$store.dispatch({ type: RELOGIN_USER });
+    },
+    toggleModal(modalData) {
+      this.modalData = modalData;
     }
   },
   watch: {
@@ -42,18 +50,20 @@ export default {
       return this.$store.getters.loggedinUser;
     },
     getMyPageByUserType() {
-      if (!this.user) return '';
-      if (this.user.type === 's') return '/student';
-      if (this.user.type === 't') return '/teacher';
-      if (this.user.type === 'h') return '/teacher/headmaster';
+      if (!this.user) return "";
+      if (this.user.type === "s") return "/student";
+      if (this.user.type === "t") return "/teacher";
+      if (this.user.type === "h") return "/teacher/headmaster";
     },
     login() {
-      if (this.user) return 'logout';
-      return 'login';
+      if (this.user) return "logout";
+      return "login";
     }
   },
   components: {
-    NavBar
+    NavBar,
+    Modal,
+    StudentAnswersModal
   }
 };
 //elad

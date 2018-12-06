@@ -6,7 +6,7 @@
     text-align: center;
     background: $clr3;
     margin-bottom: 25px;
-    p{
+    p {
         text-align: center;
         flex: 1;
         background: $clr2;
@@ -14,7 +14,7 @@
         margin: 0;
         color: $clr6
     }
-    header p{
+    header p {
         background: $clr1;
         color: $clr2;
         font-family: 'Rubik-bold';
@@ -45,8 +45,6 @@
 
 }
 
-
-
 .student-basic-info {
     background: $clr5;
     cursor: pointer;
@@ -71,9 +69,10 @@
     }
 }
 .student-expand-info {
+
     background: $clr6;
     color: $clr5;
-    p{
+    p {
         background: $clr1;
         color:  $clr2;
         height: 1.7rem;
@@ -107,11 +106,47 @@ p.change-precent {
     }
 }
 
+p.t-res {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+        padding: 0 .7rem;
+        width: 1.5rem;
+        float: left;
+    }
+}
+
+// .students-table {
+//     section:hover{
+//         .increase p:not(.expand-btn){
+//             background:lighten(darkgreen,10%)
+//         }
+//         .decrease p:not(.axpand-btn){
+//             background:lighten(darkred,10%)
+//         }
+//     }
+// }
+
+
 .increase p {
     background: darkgreen;
     color: white;
-  }
-  .decrease p {
+}
+
+.decrease p {
     background: darkred;
     color: white;
-  }
+}
+
+// .student-basic-info:hover{
+//     &.increase p:not(.expand-btn) {
+//         background: lighten(darkgreen, 10%);
+//     }
+//     &.decrease p:not(.expand-btn) {
+//         background: lighten(darkred ,10%);
+//     }
+// }
+
+

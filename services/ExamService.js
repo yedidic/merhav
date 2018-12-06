@@ -17,31 +17,84 @@ function getBySchoolCode(schoolCode) {
         })
 }
 
+// function getCurrActiveExam(schoolCode) {
+//     return MongoService.connect()
+//         .then(db => {
+//             const collection = db.collection('exam')
+//             return collection.findOne({ schoolCode, isActive: true })
+//                 .then(exam => {
+//                     return exam
+//                 })
+
+//         })
+// }
+
 function getCurrActiveExam(schoolCode) {
     return MongoService.connect()
         .then(db => {
             const collection = db.collection('exam')
             return collection.findOne({ schoolCode, isActive: true })
                 .then(exam => {
-                    return exam
+                    const questsIds = exam.questsIds.map(id => ObjectId(id))
+                    return db.collection('quest').find({ _id: { $in: questsIds } }).toArray()
+                        .then(quests => {
+                            return { ...exam, quests }
+                        })
                 })
 
         })
 }
-// function update(user) {
-//     user._id = new ObjectId(user._id);
+// function getCurrActiveExam2(schoolCode) {
 //     return MongoService.connect()
 //         .then(db => {
-//             const collection = db.collection('user');
-//             return collection
-//                 .findOneAndUpdate({ _id: user._id }, { $set: user })
-//                 .then(result => {
-//                     console.log('updated user from mongoDB', result)
-//                     return user;
-//                 });
-//         });
-// }
+//             return db.collection('exam').aggregate(
+//                 [
+//                     {
+//                         $match:
+//                             { schoolCode, isActive: true }
+//                     },
+//                     {
+//                         $lookup: {
+//                             from: 'quest',
+//                             localField: 'questsIds',
+//                             foreignField: '_id',
+//                             as: 'quests'
+//                         }
+//                     },
+//                     {
+//                         $unwind: {
+//                             path: '$quest',
+//                             preserveNullAndEmptyArrays: true
+//                         }
+//                     },
+//                     {
+//                         $group
+//                             : {
+//                             _id: new ObjectId('5bc32235408a2e35888f7db5'),
+//                             quests: {
+//                                 $push: "$answers"
+//                             },
+//                             title: {
+//                                 $first: "$title"
+//                             },
+//                             sortOrder: {
+//                                 $first: "$sortOrder"
+//                             },
+//                             description: {
+//                                 $first: "$description"
+//                             },
+//                             resultChart: {
+//                                 $first: "$resultChart"
+//                             },
+//                             freeTextIncluded: {
+//                                 $first: "$freeTextIncluded"
+//                             },
+//                         }
+//                     }
+//                 ])
 
+//         })
+// }
 // function remove(userId) {
 //     userId = new ObjectId(userId)
 //     return MongoService.connect()

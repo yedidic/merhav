@@ -14,7 +14,7 @@ const i18n = new VueI18n({
 })
 Vue.config.productionTip = false
 
-new Vue({
+ new Vue({
   i18n,
   router,
   store,
