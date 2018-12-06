@@ -13,7 +13,7 @@ function getByClassCode(classCode, schoolCode) {
     return MongoService.connect()
         .then(db => {
             const collection = db.collection('user')
-            return collection.find({ classCode, schoolCode, type: 's' }).toArray();
+            return collection.find({ classCode, schoolCode, type: 's' }).sort({"hebName": 1}).toArray();
         })
 }
 
