@@ -58,7 +58,6 @@ export default {
 
 .student-stats-links {
   margin: 0 0 0.5rem;
-  font-size: 1.2rem;
   a {
     &:not(:first-child) {
       margin: 0 1.5rem 0 0;
@@ -68,7 +67,7 @@ export default {
   a:hover,
   a.router-link-exact-active {
     color: $clr4;
-    font-size: 1.45rem;
+    font-size: 1.2rem;
   }
 }
 </style>
