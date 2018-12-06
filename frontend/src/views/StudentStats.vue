@@ -11,7 +11,7 @@
    "heading-male": "ברוך הבא {hebName}, זהו ציר ההתפתחות האישי שלך",
    "heading-female":"ברוכה הבאה {hebName}, זהו ציר ההתפתחות האישי שלך",
    "lastSubs": "הגשות אחרונות",
-   "ansAvg":"ממוצע לתשובה",
+   "ansAvg":"ממוצע",
    "emotionalLine":"מד רגשי"
   }
 }
