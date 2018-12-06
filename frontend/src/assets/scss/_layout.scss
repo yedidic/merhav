@@ -27,6 +27,7 @@ button {
     width: fit-content;
     padding: 5px 20px;
     transition: all .7s;
+    margin-bottom: .5rem;
 }
 
 button:hover {
@@ -97,3 +98,49 @@ select {
     background: $clr5;
     margin: 4px 0;
 }
+
+table {
+    text-align: center;
+    margin: 0 auto .1rem;
+    width: 100%;
+    max-width: 500px;
+    td {
+        border-radius: 3px;
+    }
+    padding: 0 10px;
+  }
+
+  thead {
+      td{
+          background: $clr1;
+      }
+      color: $clr2;
+      font-weight: 700;
+  }
+
+  tbody {
+    td {
+        background: $clr5;
+    }
+    tr:hover td{
+        background: $clr4;
+        color: $clr2; 
+    }
+  }
+
+  .avg-display {
+    color: $clr1;
+    font-weight: 700;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 0 .2rem;
+    background: $clr5;
+    &.danger {
+        background: darkred;
+        color: white;
+    }
+    &.success {
+        background: darkgreen;
+        color: white;
+    }
+  }

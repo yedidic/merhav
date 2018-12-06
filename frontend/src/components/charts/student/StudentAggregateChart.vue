@@ -35,6 +35,7 @@ export default {
           ]
         },
         options: {
+          responsive: true,
           scales: {
             yAxes: [
               {
@@ -75,4 +76,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+canvas {
+  height: 50vh;
+  margin: 0 auto;
+}
 </style>

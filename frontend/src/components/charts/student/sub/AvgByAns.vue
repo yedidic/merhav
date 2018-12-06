@@ -1,8 +1,10 @@
 <template>
   <section :class="{rtl: $i18n.locale==='he'}">
-      <div class="quest-img slide-img" :style="bgImg"></div>
+    <div class="quest-img slide-img" :style="bgImg"></div>
     <h2>{{questTxt}}</h2>
-    <h2>{{avgForDisplay}}</h2>
+    <h2>
+      <span :class="avgDisplay(avgForDisplay)">{{avgForDisplay}}</span>
+    </h2>
   </section>
 </template>
 
@@ -10,9 +12,21 @@
 export default {
   props: {
     quest: Object,
-    ans: Object
+    ans: Object,
+    idx: Number
   },
-  created() {},
+  created() {
+  },
+  methods: {
+    avgDisplay(avg) {
+      avg = +avg;
+      return [
+        "avg-display",
+        avg < 3 && avg > 0 ? "danger" : "",
+        avg > 4 ? "success" : ""
+      ];
+    }
+  },
   computed: {
     questTxt() {
       return this.$store.getters.isFemale ? this.quest.female : this.quest.male;
@@ -21,9 +35,11 @@ export default {
       return this.ans.avg.toFixed(2);
     },
     bgImg() {
-      return {
-          background: `url(${this.quest.img}) no-repeat center center`
-      };
+      return (
+        "background-image: url(" +
+        require(`@/assets/img/quest/${this.idx % 11}.jpg`) +
+        ")"
+      );
     }
   }
 };

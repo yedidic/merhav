@@ -13,8 +13,8 @@
     flex-direction: column;
 }
   
-  .flex {
-    display: flex;
+.flex {
+  display: flex;
 }
   
 .align-center {
@@ -32,10 +32,22 @@
 .space-around {
   justify-content: space-around;
 }
+.space-evenly {
+  justify-content: space-evenly;
+}
 .justify-center {
   justify-content: center;
 }
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+.flex-centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bold {
+  font-weight: 700;
 }

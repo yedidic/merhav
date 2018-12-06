@@ -20,26 +20,7 @@
 
     <headmaster-section v-if="isHeadmaster" @chooseClass="chooseClass"/>
 
-    <div class="actions-container flex-col align-center">
-      <section class="students-table" v-if="students.length > 0">
-        <header class="table-header submission-row flex">
-          <p class="expand-btn"></p>
-          <p class="t-name">שם</p>
-          <p class="pc-only t-month">חודש</p>
-          <p class="t-date">תאריך</p>
-          <p class="t-res">מד רגשי</p>
-          <p class="t-change">שינוי</p>
-        </header>
-        <submissions-content
-          v-for="student in students"
-          :hebName="student.hebName"
-          :submissions="student.submissions"
-          :studentId="student._id"
-          :isFemale="student.isFemale"
-          :key="student._id"
-        ></submissions-content>
-      </section>
-    </div>
+    <students-accordion v-if="students" :students="students"></students-accordion>
   </section>
 </template>
 
@@ -47,15 +28,15 @@
 import UserService from "../services/UserService.js";
 import GreetingUser from "@/components/GreetingUser.vue";
 import HeadmasterSection from "@/components/Teacher/HeadmasterSection.vue";
-import SubmissionsContent from "@/components/Teacher/SubmissionsContent.vue";
+import StudentsAccordion from "@/components/Teacher/StudentsAccordion.vue";
 import { GET_QUESTS } from "@/modules/QuestModule";
 
 export default {
   data() {
     return {
-      students: [],
+      students: null,
       openeds: [],
-      classCode: null,
+      classCode: null
     };
   },
   computed: {
@@ -104,7 +85,7 @@ export default {
     }
   },
   components: {
-    SubmissionsContent,
+    StudentsAccordion,
     GreetingUser,
     HeadmasterSection
   }

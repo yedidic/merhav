@@ -42,7 +42,6 @@ export default new Router({
     },
     {
       path: '/student/stats',
-      name: 'student-stats',
       component: StudentStats,
       children: [
         {

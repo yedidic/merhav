@@ -2,12 +2,12 @@
   <section class="submissions-content">
     <div
       v-for="(submission, idx) in submissions"
-      @click="expand(idx)"
+      @click="openModal(submission)"
       :key="submission.at"
       :class="['submission-row', 'flex' , idx > 0 ? 'student-expand-info': 'student-basic-info', isIncrease(idx)]"
       v-if="idx === 0 || isExpanded"
     >
-      <p class="expand-btn">
+      <p class="expand-btn" @click.stop="expand(idx)">
         <i class="fas fa-plus-circle" v-if="idx === 0"></i>
       </p>
       <p class="t-name heb-name">{{idx === 0 ? hebName: ''}}</p>
@@ -15,10 +15,7 @@
       <p class="t-date">{{getDate(submission.at)}}</p>
       <!-- How to watch the i18n here? -->
       <p class="t-res" @click.stop="expandInfo(submission)">
-        <span>{{submissionAvg(submission)}}</span>
-        <span>
-          <i class="fas fa-expand"></i>
-        </span>
+        {{submissionAvg(submission)}}
       </p>
       <p
         class="t-change change-precent flex"
@@ -53,7 +50,7 @@ export default {
     };
   },
   methods: {
-    expandInfo(submission) {
+    openModal(submission) {
       const ansIds = Object.keys(submission.ansMap);
       QuestService.getByIds(ansIds).then(quests => {
         const qAndAns = quests.map(quest => ({
